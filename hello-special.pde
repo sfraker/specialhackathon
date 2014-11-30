@@ -5,11 +5,12 @@ int x = -2;
 int y = 0;
 int rect_width = 100;
 int rect_height = 100;
-float L = 1;
-float d = 0.5;
-float beta_ship = 0.5;
+float L = 0.5;
+float d = 1;
+float beta_ship = 0.7;
 float beta_star = 0.5;
 float beta_step_size = 0.01;
+float length_step_size = 0.2;
 
 
 void setup()
@@ -36,15 +37,22 @@ void draw()
 
 void keyPressed()
 {
-  if (key == 'h') {
+  if (key == ']') {
     beta_star += beta_step_size;
-  } else if (key == 'h') {
-    beta_star += beta_step_size;
-  } else if (key == 'h') {
-    beta_star += beta_step_size;
-  } else if (key == 'h') {
-    beta_star += beta_step_size;
-  } else if (key == 'h') {
+  } else if (key == '[') {
+    beta_star -= beta_step_size;
+  } else if (key == 'j') {
+    beta_ship += beta_step_size;
+  } else if (key == 'k') {
+    beta_ship -= beta_step_size;
+  } else if (key == 'w') {
+    d += length_step_size;
+  } else if (key == 'q') {
+    d -= length_step_size;
+  } else if (key == 'x') {
+    L += length_step_size;
+  } else if (key == 'z') {
+    L -= length_step_size;
   }
 }
 
