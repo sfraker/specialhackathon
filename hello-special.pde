@@ -5,9 +5,9 @@ int x = -2;
 int y = 0;
 int rect_width = 100;
 int rect_height = 100;
-float L = 0.5;
+float L = 0.8;
 float d = 1;
-float beta_ship = 0.7;
+float beta_ship = 0.6;
 float beta_star = 0.5;
 float beta_step_size = 0.01;
 float length_step_size = 0.2;
@@ -81,6 +81,7 @@ void draw_doors(float L,
   float x2_star = x_star(t2, x2, beta_star);
 
   stroke(255);
+  strokeWeight(10);
   line(0, 0, 5, -beta_star * 5);
   line(t2_star, x2_star, -5, x2_star + beta_star * (t2_star + 5));
 }
@@ -144,7 +145,7 @@ void draw_ship(float L, float d, float beta_ship, float beta_star) {
   line(t2_star, x2_star, t4_star, x4_star);
 
   // Rocket.
-  float beta_ship_star = (x2_star - L_star)/t2_star;
+  float beta_ship_star = (x2_star - x3_star) / (t2_star - t3_star);
 
   stroke(255, 0, 0);
   strokeWeight(6);
@@ -153,14 +154,14 @@ void draw_ship(float L, float d, float beta_ship, float beta_star) {
 
   stroke(0, 0, 255);
   strokeWeight(6);
-  line(-10, L_star - 10*beta_ship_star, 10, L_star + 10*beta_ship_star);
+  line(t2_star - 10, x2_star - 10*beta_ship_star,
+       t2_star + 10, x2_star + 10*beta_ship_star);
   //line(0, L_star, t2_star, x2_star);
 
   noStroke();
   fill(128, 0, 128);
   quad(-10, -10*beta_ship_star, 10, 10*beta_ship_star,
-       10, L_star + 10*beta_ship_star, -10, L_star - 10*beta_ship_star);
+       t2_star + 10, x2_star + 10*beta_ship_star,
+       t2_star - 10, x2_star - 10*beta_ship_star);
   //quad(0, 0, 0, L_star, t2_star, x2_star, t2_star, x2_star - L_star);
-
-  strokeWeight(2);
 }
