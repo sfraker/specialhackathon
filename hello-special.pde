@@ -1,37 +1,24 @@
+int screen_width = 800;
+int screen_height = 800;
 
-int x = 0;
-int y = 0;
-int rect_width = 100;
-int rect_height = 100;
-
+int orig_t = screen_width / 2;
+int orig_x = screen_height / 2;
 
 void setup()
 {
-size(640, 360);
-background(0);
+  size(screen_width, screen_height);
+  background(0);
 }
 
 
 void draw()
 {
   fill(200);
-  rect(x, y, rect_width, rect_height);
-  x += 1;
+  draw_doors(10, 1, .8, 0);
 }
 
 void keyPressed()
 {
-  if (key == 'h') {
-    //rect_width -= 10;
-    rect_width = (rect_width - 10);
-  } else if (key == 'l') {
-    //rect_width += 10;
-    rect_width = (rect_width + 10);
-  } else if (key == 'j') {
-    y += 10;
-  } else if (key == 'k') {
-    y -= 10;
-  }
 }
 
 float gamma(float beta) {
@@ -46,4 +33,20 @@ float t_star(float t, float x, float beta_star) {
 
 float x_star(float t, float x, float beta) {
   return gamma(beta)*(x - beta*t);
+}
+
+void draw_doors(float L,
+                float d,
+                float beta_ship,
+                float beta_star) {
+  float t2 = (d - L) / beta_ship;
+  float x2 = d;
+
+  float t2_star = t_star(t2, x2, beta_star);
+  float x2_star = x_star(t2, x2, beta_star);
+
+  stroke(255);
+  line(0, 0, right_edge, -beta_star * right_edge);
+  line(t2_star, x2_star, left_edge, beta_star * t2_star);
+
 }
